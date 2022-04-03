@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$e&!n@51(txfc&(eqojg#36^v-dl$0o)^qfzneckc=%ri8e$s8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'blog-web-django.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'blogWeb.herokuapp.com']
 
 
 # Application definition
@@ -37,12 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     'rest_framework',
     'corsheaders',
     'BlogApp.apps.BlogappConfig'
 ]
 
-#CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -55,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+WHITENOISE_USE_FINDERS = True
 
 ROOT_URLCONF = 'miniproject.urls'
 
@@ -84,9 +88,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT':{
-            "host":"mongodb+srv://Shreyansh:GTh1b9HCw8roNnJR@miniproject.jsn47.mongodb.net/myFirstDatabase?authSource=admin&replicaSet=atlas-c9f5qp-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true",
+            "host":"mongodb+srv://Shreyansh:tbARUMILh8lmMqA1@miniproject.jsn47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
             "name":"miniproject",
             "authMechanism":"SCRAM-SHA-1"    #For atlas cloud db
+            
         }
     }
 }
@@ -126,10 +131,12 @@ APPEND_SLASH=False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-import os # new
-
-STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+import os
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles'), ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
