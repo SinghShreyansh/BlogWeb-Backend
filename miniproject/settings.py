@@ -84,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT':{
-            "host":"mongodb+srv://Shreyansh:Shreyansh@miniproject.jsn47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+            "host":"mongodb+srv://Shreyansh:<password>@miniproject.jsn47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
             "name":"miniproject",
             "authMechanism":"SCRAM-SHA-1"    #For atlas cloud db
         }
