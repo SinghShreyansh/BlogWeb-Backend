@@ -9,11 +9,28 @@ from BlogApp.serializers import BlogsSerializer
 
 
 @csrf_exempt
-def blogApi(request,id=0):
+def blogApiDetail(request,id=0): 
+     if request.method=='GET':
+         print("detail"+request.GET['id'])
+         blog_id=request.GET['id']
+         blog=Blogs.objects.all().filter(id=blog_id)
+         blogs_serializer=BlogsSerializer(blog,many=True)
+         return JsonResponse(blogs_serializer.data,safe=False)
+     elif request.method=='DELETE':
+            # blogs_data=JSONParser().parse(request)
+            blog_id=request.GET['id']
+            blog=Blogs.objects.get(id=blog_id) 
+            blog.delete()
+            return JsonResponse("Deleted Successfully",safe=False)   
+
+
+@csrf_exempt
+
+def blogApi(request):
     if request.method=='GET':
-        blogs= Blogs.objects.all()
-        blogs_serializer=BlogsSerializer(blogs,many=True)
-        return JsonResponse(blogs_serializer.data,safe=False)
+                blogs= Blogs.objects.all()
+                blogs_serializer=BlogsSerializer(blogs,many=True)
+                return JsonResponse(blogs_serializer.data,safe=False)
     elif request.method=='POST':
         print("Hello post")
         blogs_data=JSONParser().parse(request)
@@ -26,18 +43,21 @@ def blogApi(request,id=0):
             print("saved")
             return JsonResponse("Added Successfully",safe=False)    
         return JsonResponse("Failed to Add",safe=False)
-    elif request.method=='PUT':
-        blog_data=JSONParser().parse(request) 
-        blog_id=request.GET['id']
-        blog=Blogs.objects.get(id=blog_id)
-        blogs_serializer=BlogsSerializer(blog,data=blog_data)
-        if blogs_serializer.is_valid():
-            blogs_serializer.save()
-            return JsonResponse("Update Successfully",safe=False)
-        return JsonResponse("Failed to Update")
-    elif request.method=='DELETE':
-        blogs_data=JSONParser().parse(request)
-        blog_id=request.GET['id']
-        blog=Blogs.objects.get(id=blog_id) 
-        blog.delete()
-        return JsonResponse("Deleted Successfully",safe=False)    
+    # elif request.method=='PUT':
+    #     blog_data=JSONParser().parse(request) 
+    #     blog_id=request.GET['id']
+    #     blog=Blogs.objects.get(id=blog_id)
+    #     blogs_serializer=BlogsSerializer(blog,data=blog_data)
+    #     if blogs_serializer.is_valid():
+    #         blogs_serializer.save()
+    #         return JsonResponse("Update Successfully",safe=False)
+    #     return JsonResponse("Failed to Update")
+    # elif request.method=='DELETE':
+    #     blogs_data=JSONParser().parse(request)
+    #     blog_id=request.GET['id']
+    #     blog=Blogs.objects.get(id=blog_id) 
+    #     blog.delete()
+    #     return JsonResponse("Deleted Successfully",safe=False)   
+
+
+

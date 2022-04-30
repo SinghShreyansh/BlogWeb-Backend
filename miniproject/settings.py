@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$e&!n@51(txfc&(eqojg#36^v-dl$0o)^qfzneckc=%ri8e$s8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'blog-web-django.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,11 +43,11 @@ INSTALLED_APPS = [
     'BlogApp.apps.BlogappConfig'
 ]
 
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 MIDDLEWARE = [
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -88,7 +88,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT':{
-            "host":"mongodb+srv://Shreyansh:tbARUMILh8lmMqA1@miniproject.jsn47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+            "host":"mongodb+srv://Shreyansh:Shreyansh@miniproject.jsn47.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
             "name":"miniproject",
             "authMechanism":"SCRAM-SHA-1"    #For atlas cloud db
             
@@ -155,4 +155,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
