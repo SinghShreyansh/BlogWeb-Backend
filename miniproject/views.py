@@ -8,6 +8,7 @@ from BlogApp.models import Blogs
 from BlogApp.serializers import BlogsSerializer
 
 
+
 @csrf_exempt
 def blogApiDetail(request,id=0): 
      if request.method=='GET':
@@ -58,6 +59,4 @@ def blogApi(request):
     #     blog=Blogs.objects.get(id=blog_id) 
     #     blog.delete()
     #     return JsonResponse("Deleted Successfully",safe=False)   
-
-
 

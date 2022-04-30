@@ -17,11 +17,14 @@ Including another URLconf
 from django.urls import path
 
 from .views import blogApi,blogApiDetail
+
 urlpatterns = [
     # path('admin/', admin.site.urls),
-     path('blogs/',blogApiDetail),
 
-    path('blog',blogApi),
-    # path('/blogs?id=value1',blogApiDetail),
+    path('/blog/',blogApi),
+    path('blogs/',blogApiDetail),
+    # path('/blog?param1=value1',blogApi),
+    path('/favicon.ico',blogApi)
    
+  
 ]
